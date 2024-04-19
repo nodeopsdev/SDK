@@ -1,0 +1,80 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    # Blockchain APIs
+    - selector: pactus.Blockchain.GetBlock
+      get: "/v1/blockchain/blocks/height/{height}/verbosity/{verbosity}"
+
+    - selector: pactus.Blockchain.GetBlockHash
+      get: "/v1/blockchain/block_hashes/height/{height}"
+
+    - selector: pactus.Blockchain.GetBlockHeight
+      get: "/v1/blockchain/block_heights/hash/{hash}"
+
+    - selector: pactus.Blockchain.GetAccount
+      get: "/v1/blockchain/accounts/address/{address}"
+
+    - selector: pactus.Blockchain.GetValidator
+      get: "/v1/blockchain/validators/address/{address}"
+
+    - selector: pactus.Blockchain.GetValidatorByNumber
+      get: "/v1/blockchain/validators/{number}"
+
+    - selector: pactus.Blockchain.GetBlockchainInfo
+      get: "/v1/blockchain/info"
+
+    - selector: pactus.Blockchain.GetConsensusInfo
+      get: "/v1/blockchain/consensusInfo"
+
+    - selector: pactus.Blockchain.GetPublicKey
+      get: "/v1/blockchain/public_keys/address/{address}"
+
+    # Transaction APIs
+    - selector: pactus.Transaction.GetTransaction
+      get: "/v1/transactions/id/{id}/verbosity/{verbosity}"
+
+    - selector: pactus.Transaction.BroadcastTransaction
+      put: "/v1/transactions/broadcast/{signed_raw_transaction}"
+
+    - selector: pactus.Transaction.CalculateFee
+      get: "/v1/transactions/fee/amount/{amount}/payloadType/{payloadType}"
+
+    - selector: pactus.Transaction.GetRawTransferTransaction
+      get: "/v1/transactions/transfer/sender/{sender}/receiver/{receiver}/amount/{amount}/lock_time/{lock_time}/fee/{fee}/memo/{memo}"
+
+    - selector: pactus.Transaction.GetRawBondTransaction
+      get: "/v1/transactions/bond/sender/{sender}/receiver/{receiver}/stake/{stake}/lock_time/{lock_time}/public_key/{public_key}/fee/{fee}/memo/{memo}"
+
+    - selector: pactus.Transaction.GetRawUnBondTransaction
+      get: "/v1/transactions/unbond/validator_address/{validator_address}/lock_time/{lock_time}/memo/{memo}"
+
+    - selector: pactus.Transaction.GetRawWithdrawTransaction
+      get: "/v1/transactions/withdraw/validator_address/{validator_address}/account_address/{account_address}/amount/{amount}/lock_time/{lock_time}/fee/{fee}/memo/{memo}"
+
+    # Network APIs
+    - selector: pactus.Network.GetNetworkInfo
+      get: "/v1/network/info"
+
+    - selector: pactus.Network.GetNodeInfo
+      get: "/v1/network/node"
+
+    # Wallet APIs
+    - selector: pactus.Wallet.GetValidatorAddress
+      get: "/v1/wallets/validator_address/{public_key}"
+
+    - selector: pactus.Wallet.CreateWallet
+      get: "/v1/wallets/create/wallet_name/{wallet_name}/mnemonic/{mnemonic}/language/{language}"
+
+    - selector: pactus.Wallet.LoadWallet
+      get: "/v1/wallets/load/wallet_name/{wallet_name}"
+
+    - selector: pactus.Wallet.UnloadWallet
+      get: "/v1/wallets/unload/wallet_name/{wallet_name}"
+
+    - selector: pactus.Wallet.LockWallet
+      get: "/v1/wallets/lock/wallet_name/{wallet_name}"
+
+    - selector: pactus.Wallet.UnlockWallet
+      get: "/v1/wallets/unlock/wallet_name/{wallet_name}/password/{password}/timeout/{timeout}"
